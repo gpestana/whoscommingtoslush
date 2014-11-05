@@ -36,5 +36,5 @@ var parse = function(i, cb) {
 
 parse(0, function() {
   console.log('companies fetched: '+companies.length)
-  fs.writeFile('./companies.json', JSON.stringify(companies) , 'utf-8');
+  fs.writeFile('../data/companies.json', JSON.stringify(companies) , 'utf-8');
 })
