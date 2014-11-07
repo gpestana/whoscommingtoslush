@@ -37,6 +37,17 @@ app.post('/indexer', function(req, res) {
   }
   fs.readFile(req.files.document.path, {'encoding': 'utf8'}, function(err, batch) {
     if(err) return res.send(500, 'Error reading document');
+
+    var set = req.files.document.originalname 
+/*
+    if(set == 'companies.json') {
+      filters = ['title','info','desc','full_desc','url']
+    } else if(set == 'investors.json') {
+      filters = ['title','full_desc']
+    } else if(set == 'speakers.json') {
+      filters = ['title','desc','full_desc']
+    }        
+*/
     si.add(JSON.parse(batch), req.files.document.name, filters, function(msg) {
       res.send(msg);
     });
