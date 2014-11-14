@@ -7,6 +7,10 @@ cheerio = require('cheerio')
 var speakersURL = 'http://www.slush.org/speakers/'
 var sep = '<div class="item company moreinfo">'
 
+var no_img = "background-image:url('http://files.slush.org/mediacontent/');"
+var white_img = "http://wallfoy.com/wp-content/uploads/2013/12/White-Color-92.jpg"
+
+
 var speakers = []
 
 var parse = function(i, cb) {
@@ -19,9 +23,19 @@ var parse = function(i, cb) {
         var entry = $(this).prev()
         c.title = entry.find('.title').text()    
         c.desc = entry.find('.description').text()    
-        c.full_desc = entry.find('.fulldescription').text()    
-        
-        speakers.push(c) 
+        c.full_desc = entry.find('.fulldescription p').text()            
+        c.speaks = entry.find('.speaks').text()    
+
+        var img = entry.find('.image').attr('style')
+
+       if(img == no_img){
+          c.img = white_img
+        } else if(img) {
+          c.img = img.split("'")[1]
+        }
+
+        c.type = "SPEAKER"
+        if(c.title) speakers.push(c) 
       })
   
     cb()

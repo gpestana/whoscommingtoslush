@@ -36,7 +36,7 @@ var parse = function(i, cb) {
           c.img = img.split("'")[1]
         }
 
-        c.type = '@company'
+        c.type = '@COMPANY'
         if(c.title) companies.push(c)  
      })
   

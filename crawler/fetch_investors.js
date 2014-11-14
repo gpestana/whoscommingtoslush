@@ -25,7 +25,7 @@ var parse = function(i, cb) {
           c.img = img.split("'")[1]
         }
       
-        c.type = '@investor' 
+        c.type = 'INVESTOR' 
 
         if(c.title) {
           investors.push(c)
